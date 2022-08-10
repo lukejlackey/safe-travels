@@ -16,8 +16,12 @@ public class ExpenseService {
 		this.expenseRepo = expenseRepo;
 	}
 	
-	public List<Expense> allExpenses(){
+	public List<Expense> allExpenses() {
 		return expenseRepo.findAll();
+	}
+	
+	public Expense findExpenseById(Long id) {
+		return expenseRepo.findExpenseById(id);
 	}
 	
 	public String createExpense(Expense expense) {
@@ -25,4 +29,9 @@ public class ExpenseService {
 		return "Created new expense: id#" + expense.getId();
 	}
 	
+	public Expense updateExpense(Expense expense) {
+		expenseRepo.save(expense);
+		System.out.println("Updated expense: id#" + expense.getId());
+		return expense;
+	}
 }

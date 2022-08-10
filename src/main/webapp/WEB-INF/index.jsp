@@ -18,6 +18,7 @@
 				<th>Expense</th>
 				<th>Vendor</th>
 				<th>Amount</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -26,30 +27,31 @@
 					<td><c:out value="${exp.getName()}"></c:out></td>
 					<td><c:out value="${exp.getVendor()}"></c:out></td>
 					<td>$<c:out value="${exp.getAmount()}"></c:out></td>
+					<td><a href="/edit/${exp.getId()}">edit</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	<h2 class="display-2 text-primary">Add an expense:</h2>
-	<form:form action="/add" method="post" modelAttribute="expense">
-		<form:errors path="*"/>
+	<form:form class="container" action="/" method="post" modelAttribute="expense">
+		<h2 class="display-4 text-primary">Add an expense:</h2>
+		<form:errors class="text-danger" path="*"/>
 		<div>
-			<form:label path="name">Expense Name:</form:label>
-			<form:input path="name" type="text"/>
+			<form:label class="form-label" path="name">Expense Name:</form:label>
+			<form:input class="form-control" path="name" type="text"/>
 		</div>
 		<div>
-			<form:label path="vendor">Vendor:</form:label>
-			<form:input path="vendor" type="text"/>
+			<form:label class="form-label" path="vendor">Vendor:</form:label>
+			<form:input class="form-control" path="vendor" type="text"/>
 		</div>
 		<div>
-			<form:label path="amount">Amount:</form:label>
-			<form:input path="amount" type="number" step="0.01"/>
+			<form:label class="form-label" path="amount">Amount:</form:label>
+			<form:input class="form-control" path="amount" type="number" step="0.01"/>
 		</div>
 		<div>
-			<form:label path="description">Description:</form:label>
-			<form:textarea path="description"/>
+			<form:label class="form-label" path="description">Description:</form:label>
+			<form:textarea class="form-control" path="description"/>
 		</div>
-		<button type="submit">Submit</button>
+		<button class="btn btn-primary mt-3" type="submit">Submit</button>
 	</form:form>
 </body>
 </html>
