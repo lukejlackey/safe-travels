@@ -24,10 +24,16 @@
 		<tbody>
 			<c:forEach var="exp" items="${expenses}">
 				<tr>
-					<td><c:out value="${exp.getName()}"></c:out></td>
+					<td><a href="/expenses/${exp.getId()}"><c:out value="${exp.getName()}"></c:out></a></td>
 					<td><c:out value="${exp.getVendor()}"></c:out></td>
 					<td>$<c:out value="${exp.getAmount()}"></c:out></td>
-					<td><a href="/edit/${exp.getId()}">edit</a></td>
+					<td>
+						<a href="/expenses/${exp.getId()}/edit">edit</a>
+						<form action="/expenses/${exp.getId()}" method="post">
+							<input type="hidden" name="_method" value="delete">
+							<input class="btn btn-danger" type="submit" value="delete"/>
+						</form>
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>

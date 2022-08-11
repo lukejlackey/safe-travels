@@ -1,6 +1,7 @@
 package com.lukejlackey.safetravels.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,11 @@ public class ExpenseService {
 	}
 	
 	public Expense findExpenseById(Long id) {
-		return expenseRepo.findExpenseById(id);
+		Optional<Expense> optionalExpense = expenseRepo.findById(id);
+		if(optionalExpense.isPresent()) {
+			return optionalExpense.get();
+		}
+		return null;
 	}
 	
 	public String createExpense(Expense expense) {
@@ -33,5 +38,9 @@ public class ExpenseService {
 		expenseRepo.save(expense);
 		System.out.println("Updated expense: id#" + expense.getId());
 		return expense;
+	}
+	
+	public void deleteExpense(Long id) {
+		expenseRepo.deleteById(id);
 	}
 }

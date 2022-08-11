@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 </head>
 <body>
-	<form:form class="container" action="/edit/${expense.getId()}" method="post" modelAttribute="expense">
+	<form:form class="container" action="/expenses/${expense.getId()}/edit" method="post" modelAttribute="expense">
 		<div class="d-flex justify-content-between align-items-center">
 			<h1 class="display-1 text-primary">Edit Expense</h1>
 			<a href="/">Go Back</a>

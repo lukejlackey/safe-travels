@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,19 +41,31 @@ public class HomeController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("/edit/{id}")
+	@GetMapping("/expenses/{id}")
+	public String show(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("expense",expenseService.findExpenseById(id));
+		return "show.jsp";
+	}
+	
+	@GetMapping("/expenses/{id}/edit")
 	public String showEdit(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("expense",expenseService.findExpenseById(id));
 		return "edit.jsp";
 	}
 	
-	@PutMapping("/edit/{id}")
+	@PutMapping("/expenses/{id}/edit")
 	public String edit(@Valid @ModelAttribute("expense")Expense expense, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			model.addAttribute("expense",expense);
 			return "edit.jsp";
 		}
 		expenseService.updateExpense(expense);
+		return "redirect:/";
+	}
+	
+	@DeleteMapping("/expenses/{id}")
+	public String processDelete(@PathVariable("id") Long id) {
+		expenseService.deleteExpense(id);
 		return "redirect:/";
 	}
 	
